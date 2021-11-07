@@ -48,7 +48,7 @@ function App() {
     }
     function changeModal(i) {
         let temp = {...modalInfo};
-        if(modalInfo.nowIdx == i) {
+        if(modalInfo.nowIdx === i) {
             temp.modalIsOpened = !temp.modalIsOpened;
         } else {
             temp.modalIsOpened = true;
