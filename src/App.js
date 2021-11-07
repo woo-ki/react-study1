@@ -15,6 +15,7 @@ function App() {
             like: 0
         }
     ]);
+    let [modalIsOpened, changeModalIsOpened] = useState(false);
 
     function sortPost() {
         let temp = [...posts];
@@ -47,14 +48,18 @@ function App() {
                 posts.map((post, i) => {
                     return(
                         <div className="list">
-                            <h3>{post.title} <span onClick={() => {changeLikeCnt(i)}}>👍</span> {post.like}</h3>
+                            <h3><span onClick={() => {changeModalIsOpened(!modalIsOpened)}}>{post.title}</span> <span onClick={() => {changeLikeCnt(i)}}>👍</span> {post.like}</h3>
                             <p>2월 17일 발행</p>
                             <hr/>
                         </div>
                     )
                 })
             }
-            <Modal />
+            {
+                modalIsOpened
+                ? <Modal />
+                : null
+            }
         </div>
     );
 }
