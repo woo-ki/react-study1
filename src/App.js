@@ -8,22 +8,26 @@ function App() {
             title: '남자 코트 추천',
             content: '롱코트좋아연~',
             like: 0,
-            created_dt: '2021-11-05'
+            created_dt: '2021-11-06'
         }, {
             title: '강남 우동 맛집',
             content: '강남역 지하에 있지요~',
             like: 0,
-            created_dt: '2021-11-06'
+            created_dt: '2021-11-05'
         }, {
             title: '리액트 독학',
             content: '리액트 독학 하는중인데\n음... 뷰 하고나서 그런가 좀 쉬운건가..!',
             like: 0,
-            created_dt: '2021-11-07'
+            created_dt: '2021-11-04'
         }
     ]);
     let [modalInfo, changeModalInfo] = useState({
         modalIsOpened: false,
         nowIdx: 0
+    });
+    let [newPost, changeNewPost] = useState({
+        title: '',
+        content: ''
     });
 
     function sortPost() {
@@ -56,13 +60,37 @@ function App() {
         temp.nowIdx = i;
         changeModalInfo(temp);
     }
+    function inputNewPost() {
+        let temp = {...newPost};
+        temp.title = document.querySelector('#new-post-input-area > input').value;
+        temp.content = document.querySelector('#new-post-input-area > textarea').value;
+        changeNewPost(temp);
+    }
+    function addNewPost() {
+        let temp = [...posts];
+        let post = {...newPost};
+        post.like = 0;
+        const today = new Date();
+        let todayArr = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
+        todayArr = todayArr.map(x => {
+            if(x < 10) {
+                return '0' + x;
+            } else {
+                return x;
+            }
+        });
+        post.created_dt = todayArr.join('-');
+        temp.unshift(post);
+        document.querySelector('#new-post-input-area > input').value = '';
+        document.querySelector('#new-post-input-area > textarea').value = '';
+        changePosts(temp);
+    }
 
     return (
         <div className="App">
             <div className={"black-nav"}>
                 <div>개발 Blog</div>
             </div>
-            <button onClick={sortPost}>버튼</button>
             {
                 posts.map((post, i) => {
                     return(
@@ -74,10 +102,18 @@ function App() {
                     )
                 })
             }
+            <div id={"new-post-area"}>
+                <div id={"new-post-input-area"}>
+                    <input type="text" onChange={inputNewPost}/>
+                    <textarea onChange={inputNewPost} />
+                </div>
+                <div id={"new-post-submit-btn"} onClick={addNewPost}>발행</div>
+            </div>
+            <button onClick={sortPost}>정렬버튼</button>
             {
                 modalInfo.modalIsOpened
-                ? <Modal post={posts[modalInfo.nowIdx]} />
-                : null
+                    ? <Modal post={posts[modalInfo.nowIdx]}/>
+                    : null
             }
         </div>
     );

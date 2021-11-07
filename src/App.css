@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 .App {
     text-align: center;
 }
 
 body {
     font-family: 'Nanum Gothic', sans-serif;
+    max-width: 540px;
+    padding: 0;
+    margin: 0 auto;
 }
 
 .black-nav {
@@ -19,6 +26,7 @@ body {
 }
 
 .list {
+    width: 100%;
     margin-top: 30px;
     text-align: left;
     padding-left: 20px;
@@ -29,4 +37,26 @@ body {
     padding: 20px;
     background: #eee;
     margin-top: 20px;
+}
+
+#new-post-area {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+
+#new-post-input-area {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+#new-post-submit-btn {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: coral;
+    color: white;
+    cursor: pointer;
 }
