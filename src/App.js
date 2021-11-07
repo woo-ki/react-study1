@@ -1,16 +1,26 @@
+import {useState} from "react";
 import './App.css';
 
 function App() {
 
-    let posts = '강남 고기 맛집';
-    let titleStyle = {color: 'blue', fontSize: '30px'};
+    let [titleArr, changeTitleArr] = useState(['남자 코트 추천', '강남 우동 맛집', '리액트 독학']);
 
     return (
         <div className="App">
             <div className={"black-nav"}>
-                <div style={titleStyle}>개발 Blog</div>
+                <div>개발 Blog</div>
             </div>
-            <h4>{posts}</h4>
+            {
+                titleArr.map(title => {
+                    return(
+                        <div className="list">
+                            <h3>{title}</h3>
+                            <p>2월 17일 발행</p>
+                            <hr/>
+                        </div>
+                    )
+                })
+            }
         </div>
     );
 }
